@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     println("Selecciona tu pelicula")
 
     // test pelicula
-    val scaryMovie = Movie("Scary Movie", listOf("Pedro Guzman"), 106.55, "Comedy", listOf("Joaquin Lopez Doriga"), "Miercoles", 9.8, "Spanish")
+    //val scaryMovie = Movie("Scary Movie", listOf("Pedro Guzman"), 106.55, "Comedy", listOf("Joaquin Lopez Doriga"), "Miercoles", 9.8, "Spanish")
 
     // Clase calendario
 
