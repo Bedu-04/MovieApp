@@ -2,15 +2,25 @@ package main.kotlin.classes
 
 import java.util.Date
 
+
+enum class Category {
+    Comedia, Drama, Suspenso, Terror
+}
+
+enum class Language {
+    Español, Inglés, Francés, Coreano
+}
+
 class Movie(
     name: String,
     actors: List<String>,
     duration: Double,
-    gender: String, // ESTO EN UN ENUM
     directors: List<String>,
     date: String,
     rating: Double,
-    language: String,
+    language: Language,
+    category: Category,
+
 
 ) {
     // Agregar a tu lista
