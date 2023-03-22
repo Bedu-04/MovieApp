@@ -1,3 +1,4 @@
+import main.kotlin.classes.App
 import main.kotlin.classes.Movie
 
 fun main(args: Array<String>) {
@@ -16,5 +17,11 @@ fun main(args: Array<String>) {
     //val scaryMovie = Movie("Scary Movie", listOf("Pedro Guzman"), 106.55, "Comedy", listOf("Joaquin Lopez Doriga"), "Miercoles", 9.8, "Spanish")
 
     // Clase calendario
+    val app = App()
+    app.showCinemaListings()
 
+    app.addMovie()
+
+    app.addMovie()
+    println(app.cinemaListings.toString())
 }
