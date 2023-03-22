@@ -92,7 +92,7 @@ class App () {
             2 -> showMovieList()
             3 -> addMovie()
             4 -> "Eliminar"
-            else-> "No se ecnuentra dentro del catalogo"
+            else-> "No se encuentra dentro del catalogo"
         }
 
     }
