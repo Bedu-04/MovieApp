@@ -21,9 +21,25 @@ class Movie(
     language: Language,
     category: Category,
 
+    val pelis: List<String> = listOf(
+        "Scary Movie",
+        "Scream 6",
+        "Shazam",
+        "La Ballena",
+        "Creed"
+    )
 
 ) {
     // Agregar a tu lista
 
+    fun main() {
+        for (peliculas in pelis) {
+            println(pelis)
+        }
+    }
+
+
+
     // Eliminar de tu lista
 }
+
