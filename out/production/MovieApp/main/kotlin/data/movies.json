@@ -1,0 +1,32 @@
+[
+  {
+    "name" : "test1",
+    "actors": ["said", "jose"],
+    "duration": 106,
+    "directors" : ["jorge"],
+    "date": "2022-10-16",
+    "rating": 5.4,
+    "language": "ES",
+    "category": "Comedy"
+  },
+  {
+    "name" : "test2",
+    "actors": ["said", "jose"],
+    "duration": 106,
+    "directors" : ["jorge"],
+    "date": "2022-10-16",
+    "rating": 5.4,
+    "language": "ES",
+    "category": "Comedy"
+  },
+  {
+    "name" : "test3",
+    "actors": ["said", "jose"],
+    "duration": 106,
+    "directors" : ["jorge"],
+    "date": "2022-10-16",
+    "rating": 5.4,
+    "language": "ES",
+    "category": "Comedy"
+  }
+]

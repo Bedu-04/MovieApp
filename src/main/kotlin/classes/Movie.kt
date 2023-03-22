@@ -12,34 +12,17 @@ enum class Language {
 }
 
 class Movie(
-    name: String,
-    actors: List<String>,
-    duration: Double,
-    directors: List<String>,
-    date: String,
-    rating: Double,
-    language: Language,
-    category: Category,
-
-    val pelis: List<String> = listOf(
-        "Scary Movie",
-        "Scream 6",
-        "Shazam",
-        "La Ballena",
-        "Creed"
-    )
-
+    val id: Int,
+   val name: String,
+    val actors: List<String>,
+    val duration: Double,
+    val directors: List<String>,
+    val date: String,
+    val rating: Double,
+    val language: Language,
+    val category: Category,
 ) {
     // Agregar a tu lista
 
-    fun main() {
-        for (peliculas in pelis) {
-            println(pelis)
-        }
-    }
-
-
-
     // Eliminar de tu lista
 }
-
