@@ -34,11 +34,20 @@ class App () {
     }
 
     fun showMovieList () {
-        println("Esta es tu lista de peliculas")
 
-        myMovieList.forEach{Movie ->
-            println("${Movie.id}.- ${Movie.name}")
+        if(myMovieList.isNotEmpty()) {
+
+            println("Esta es tu lista de peliculas:")
+            myMovieList.forEach { Movie ->
+                println("${Movie.id}.- ${Movie.name}")
+            }
+
+        } else {
+            println("No tienes películas en tu lista.")
+            println("")
+            showMenu()
         }
+        println("")
         showMenu()
     }
 
@@ -54,14 +63,14 @@ class App () {
         val movieId = getIdMovie()
         val existMovie= verifyMovie(movieId)
         if (existMovie == true) {
-            println("La pelicula ya esta en tu lista, selecciona otra opcion")
+            println("Esa película ya esta en tu lista, selecciona otra opción.")
             return showMenu()
 
         }
         val myMovie = cinemaListings.find { it.id == movieId }
         if (myMovie == null) {
-            println("No se encontro la pelicula solicitada")
-            return
+            println("No se encontró la película solicitada")
+            return showMenu()
         }
 
         println("${myMovie.id}.- ${myMovie.name}")
@@ -70,6 +79,43 @@ class App () {
         //showMovieList()
         showMenu()
     }
+
+    fun deleteMovie() {
+        val notEmpty = myMovieList.isNotEmpty()
+
+        if (notEmpty) {
+            val movieId = getIdMovie()
+            val existMovie = verifyMovie(movieId)
+            val myMovie = cinemaListings.find { it.id == movieId }
+
+            if (existMovie) {
+
+                myMovieList.remove(myMovie)
+
+                println("Película eliminada: ")
+                println("${myMovie?.id}.- ${myMovie?.name}")
+                println("")
+
+                return showMenu()
+
+            } else {
+                println("La opción ingresada no existe dentro de tu lista.")
+                println("")
+                showMenu()
+
+                return
+            }
+        } else {
+            println("No hay películas en tu lista por eliminar.")
+            println("")
+            showMenu()
+
+            return
+        }
+                //println("")
+                //showMenu()
+    }
+
 
     fun verifyMovie(movieId: Int): Boolean{
         val existMovie = myMovieList.find { it.id == movieId }
@@ -91,7 +137,7 @@ class App () {
             1 -> showCinemaListings()
             2 -> showMovieList()
             3 -> addMovie()
-            4 -> "Eliminar"
+            4 -> deleteMovie()
             else-> "No se encuentra dentro del catalogo"
         }
 
