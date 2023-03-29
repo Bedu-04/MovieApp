@@ -25,20 +25,29 @@ class App () {
     }
 
     fun showMenu(){
-        println("Menu")
-        println("1) Ver cartelera")
-        println("2) Ver Mi Lista")
-        println("3) Agregar a Mi Lista")
-        println("4) Eliminar de Mi Lista")
-        val menuOption = getMenuOption("\"Ingresa la opcion deseada: \"").toInt()
+        try {
+            println("Menu")
+            println("1) Ver cartelera")
+            println("2) Ver Mi Lista")
+            println("3) Agregar a Mi Lista")
+            println("4) Eliminar de Mi Lista")
+            val menuOption = getMenuOption("\"Ingresa la opcion deseada: \"").toInt()
 
-        when (menuOption) {
-            1 -> showCinemaListings()
-            2 -> showMovieList()
-            3 -> addMovie()
-            4 -> deleteMovie()
-            else-> "No se encuentra dentro del catalogo"
+            when (menuOption) {
+                1 -> initCinema()
+                2 -> showMovieList()
+                3 -> addMovie()
+                4 -> deleteMovie()
+                else-> {
+                    println("No se encuentra dentro del catalogo")
+                    showMenu()
+                }
+            }
+        } catch(e:NumberFormatException) {
+            println("No se pudo convertir, hubo un error: $e")
+            showMenu()
         }
+
 
     }
     fun getMenuOption(text: String): String {
@@ -48,26 +57,14 @@ class App () {
         return menuOption
     }
 
-    fun showCinemaListings () {
-        // - ${Movie.language} - ${Movie.rating}☆ - ${Movie.duration}m
-        println("********* Cartelera ********")
-        println("Selecciona tu pelicula: ")
-        cinemaListings.forEach{Movie ->
-            println("${Movie.id}.- ${Movie.name}")
-        }
-
+    fun initCinema () {
+        showCinemaListings()
         do {
-            var menuOption = getMenuOption("Ver mas detalles de una pelicula? (si / no)").toString().lowercase()
+            var menuOption = getMenuOption("Ver mas detalles de las peliculas? (si / no)").toString().lowercase()
 
             if (menuOption == "si") {
-                val option = getMenuOption("Ingresa el id de la pelicula:").toInt()
-
-                val movie = cinemaListings.find { it.id == option }
-                if (movie == null){
-                    println("La pelicula no existe")
-                    return
-                }
-                println("${movie.id}.- ${movie.name} - ${movie.language} - ${movie.rating}☆ - ${movie.duration}m")
+                showCinemaListings(true)
+                menuOption = "no"
             }
 
             if (menuOption == "no") showMenu()
@@ -77,8 +74,19 @@ class App () {
         // showMenu()
     }
 
-    fun showMovieList () {
+    fun showCinemaListings (showAllInfo: Boolean = false) {
 
+        println("********* Cartelera ********")
+        cinemaListings.forEach{Movie ->
+            if (showAllInfo) {
+                println("${Movie.id}.- ${Movie.name} - ${Movie.language} - ${Movie.rating}☆ - ${Movie.duration}m")
+            } else {
+                println("${Movie.id}.- ${Movie.name}")
+            }
+        }
+    }
+
+    fun showMovieList () {
         if(myMovieList.isNotEmpty()) {
 
             println("Esta es tu lista de peliculas:")
