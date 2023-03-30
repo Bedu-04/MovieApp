@@ -24,21 +24,82 @@ class App () {
         println("Catetelera cargada exitosamente....")
     }
 
-    fun showCinemaListings () {
-        println("Bienvenido a beduMoviesApp")
-        println("Selecciona tu pelicula")
-        cinemaListings.forEach{Movie ->
-            println("${Movie.id}.- ${Movie.name}")
+    fun showMenu(){
+        try {
+            println("Menu")
+            println("1) Ver cartelera")
+            println("2) Ver Mi Lista")
+            println("3) Agregar a Mi Lista")
+            println("4) Eliminar de Mi Lista")
+            val menuOption = getMenuOption("\"Ingresa la opcion deseada: \"").toInt()
+
+            when (menuOption) {
+                1 -> initCinema()
+                2 -> showMovieList()
+                3 -> addMovie()
+                4 -> deleteMovie()
+                else-> {
+                    println("No se encuentra dentro del catalogo")
+                    showMenu()
+                }
+            }
+        } catch(e:NumberFormatException) {
+            println("No se pudo convertir, hubo un error: $e")
+            showMenu()
         }
-        showMenu()
+
+
+    }
+    fun getMenuOption(text: String): String {
+        println(text)
+        val menuOption = readln()
+
+        return menuOption
+    }
+
+    fun initCinema () {
+        showCinemaListings()
+        do {
+            var menuOption = getMenuOption("Ver mas detalles de las peliculas? (si / no)").toString().lowercase()
+
+            if (menuOption == "si") {
+                showCinemaListings(true)
+                menuOption = "no"
+            }
+
+            if (menuOption == "no") showMenu()
+
+
+        } while (menuOption != "si" || menuOption != "no")
+        // showMenu()
+    }
+
+    fun showCinemaListings (showAllInfo: Boolean = false) {
+
+        println("********* Cartelera ********")
+        cinemaListings.forEach{Movie ->
+            if (showAllInfo) {
+                println("${Movie.id}.- ${Movie.name} - ${Movie.language} - ${Movie.rating}☆ - ${Movie.duration}m")
+            } else {
+                println("${Movie.id}.- ${Movie.name}")
+            }
+        }
     }
 
     fun showMovieList () {
-        println("Esta es tu lista de peliculas")
+        if(myMovieList.isNotEmpty()) {
 
-        myMovieList.forEach{Movie ->
-            println("${Movie.id}.- ${Movie.name}")
+            println("Esta es tu lista de peliculas:")
+            myMovieList.forEach { Movie ->
+                println("${Movie.id}.- ${Movie.name}")
+            }
+
+        } else {
+            println("No tienes películas en tu lista.")
+            println("")
+            showMenu()
         }
+        println("")
         showMenu()
     }
 
@@ -49,19 +110,18 @@ class App () {
         return movieId
     }
 
-
     fun addMovie() {
         val movieId = getIdMovie()
         val existMovie= verifyMovie(movieId)
         if (existMovie == true) {
-            println("La pelicula ya esta en tu lista, selecciona otra opcion")
+            println("Esa película ya esta en tu lista, selecciona otra opción.")
             return showMenu()
 
         }
         val myMovie = cinemaListings.find { it.id == movieId }
         if (myMovie == null) {
-            println("No se encontro la pelicula solicitada")
-            return
+            println("No se encontró la película solicitada")
+            return showMenu()
         }
 
         println("${myMovie.id}.- ${myMovie.name}")
@@ -69,6 +129,42 @@ class App () {
 
         //showMovieList()
         showMenu()
+    }
+
+    fun deleteMovie() {
+        val notEmpty = myMovieList.isNotEmpty()
+
+        if (notEmpty) {
+            val movieId = getIdMovie()
+            val existMovie = verifyMovie(movieId)
+            val myMovie = cinemaListings.find { it.id == movieId }
+
+            if (existMovie) {
+
+                myMovieList.remove(myMovie)
+
+                println("Película eliminada: ")
+                println("${myMovie?.id}.- ${myMovie?.name}")
+                println("")
+
+                return showMenu()
+
+            } else {
+                println("La opción ingresada no existe dentro de tu lista.")
+                println("")
+                showMenu()
+
+                return
+            }
+        } else {
+            println("No hay películas en tu lista por eliminar.")
+            println("")
+            showMenu()
+
+            return
+        }
+                //println("")
+                //showMenu()
     }
 
     fun verifyMovie(movieId: Int): Boolean{
@@ -79,27 +175,5 @@ class App () {
         return true
     }
 
-    fun showMenu(){
-        println("Menu")
-        println("1) Ver cartelera")
-        println("2) Ver Mi Lista")
-        println("3) Agregar a Mi Lista")
-        println("4) Eliminar de Mi Lista")
-        val menuOption = getMenuOption()
 
-        when (menuOption) {
-            1 -> showCinemaListings()
-            2 -> showMovieList()
-            3 -> addMovie()
-            4 -> "Eliminar"
-            else-> "No se encuentra dentro del catalogo"
-        }
-
-    }
-    fun getMenuOption(): Int {
-        println("Ingresa la opcion deseada: ")
-        val menuOption = readln().toInt()
-
-        return menuOption
-    }
 }
