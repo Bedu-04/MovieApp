@@ -31,6 +31,7 @@ class App () {
             println("2) Ver Mi Lista")
             println("3) Agregar a Mi Lista")
             println("4) Eliminar de Mi Lista")
+            println("5) Salir")
             val menuOption = getMenuOption("\"Ingresa la opcion deseada: \"").toInt()
 
             when (menuOption) {
@@ -38,6 +39,7 @@ class App () {
                 2 -> showMovieList()
                 3 -> addMovie()
                 4 -> deleteMovie()
+                5 -> println("Gracias por usar MovieApp")
                 else-> {
                     println("No se encuentra dentro del catalogo")
                     showMenu()

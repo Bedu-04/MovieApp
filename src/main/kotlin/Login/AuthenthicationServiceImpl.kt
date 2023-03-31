@@ -1,14 +1,19 @@
 package main.kotlin.Login
+
 // implementing interface
 class AuthenthicationServiceImpl: AuthService {
     private val users = mutableMapOf<String, String>()
 
+    fun createAdminAccount() {
+        users["admin"] = "admin"
+    }
     override fun login(username: String, password: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
+
         val storedPassword = users[username]
         if (storedPassword == null) {
-            onError("User not found")
+            onError("Usuario no encontrado")
         } else if (storedPassword != password) {
-            onError("Incorrect password")
+            onError("Contraseña Incorrecta")
         } else {
             onSuccess()
         }
@@ -16,16 +21,18 @@ class AuthenthicationServiceImpl: AuthService {
 
     override fun register(username: String, password: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
         if (users.containsKey(username)) {
-            onError("Username already taken")
-        } else {
+            onError("El usuario ya existe favor de ingresar otro")
+        } else if (!validateUsername(username)) {
+            onError("El usuario debe tener al menos 4 caracteres")
+        }
+        else {
             users[username] = password
             onSuccess()
         }
     }
 
-    //private functions
+    //private functions used to validate username
     private fun validateUsername(username: String): Boolean {
-        // This is an example of a private function that can be used internally by the AuthServiceImpl class, but not accessed from outside.
         return username.isNotBlank() && username.length >= 4
     }
 }
