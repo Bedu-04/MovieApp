@@ -1,12 +1,12 @@
 package main.kotlin.classes
 
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import main.kotlin.utils.getConsoleLine
+import kotlin.system.exitProcess
 
 
 class App () {
+
     val myMovieList: MutableList<Movie> = arrayListOf()
     val cinemaListings: MutableList<Movie> = arrayListOf()
 
@@ -17,12 +17,17 @@ class App () {
         delay(1000)
         println("Empezando a cargar la cartelera")
         delay(1500)
-        cinemaListings.add(Movie(1,"Scary Movie", listOf("Pedro Guzman"), 106.55, listOf("Joaquin Lopez Doriga"), "2022-12-16", 5.4, Language.Español, Category.Comedia))
-        cinemaListings.add(Movie(2,"Scary Movie2", listOf("Pedro Guzman"), 106.55, listOf("Joaquin Lopez Doriga"), "2022-12-16", 5.4, Language.Español, Category.Comedia))
-        cinemaListings.add(Movie(3,"Scary Movie3", listOf("Pedro Guzman"), 106.55, listOf("Joaquin Lopez Doriga"), "2022-12-16", 5.4, Language.Español, Category.Comedia))
-        cinemaListings.add(Movie(45,"Scary Movie4", listOf("Pedro Guzman"), 106.55, listOf("Joaquin Lopez Doriga"), "2022-12-16", 5.4, Language.Español, Category.Comedia))
-        println("Cartelera cargada exitosamente....")
+        cinemaListings.add(Movie(1,"Scream 6", listOf("Pedro Guzman"), 123.0, listOf("Joaquin Lopez Doriga"), "9-03-2023", 7.2, Language.Español, Category.Suspenso))
+        cinemaListings.add(Movie(2,"Shazam", listOf("Pedro Guzman"), 131.0, listOf("Joaquin Lopez Doriga"), "1-1-2023", 6.6, Language.Español, Category.Acción))
+        cinemaListings.add(Movie(3,"La Ballena", listOf("Pedro Guzman"), 177.0, listOf("Joaquin Lopez Doriga"), "27-1-2023", 7.8, Language.Español, Category.Drama))
+        cinemaListings.add(Movie(4,"Creed 3", listOf("Pedro Guzman"), 116.0, listOf("Joaquin Lopez Doriga"), "1-1-2023", 7.3, Language.Español, Category.Drama))
+        cinemaListings.add(Movie(5,"Ant Man y la Avispa: Quantumnaía", listOf("Pedro Guzman"), 124.0, listOf("Joaquin Lopez Doriga"), "17-2-2023", 6.4, Language.Español, Category.CienciaFicción))
+        cinemaListings.add(Movie(6,"Calabozos y Dragones", listOf("Pedro Guzman"), 134.0, listOf("Joaquin Lopez Doriga"), "30-3-2023", 8.0, Language.Español, Category.Fantasía))
+        cinemaListings.add(Movie(7,"Mario Bros", listOf("Pedro Guzman"), 92.0, listOf("Joaquin Lopez Doriga"), "7-4-2023", 9.2, Language.Español, Category.Animación))
+        cinemaListings.add(Movie(8,"¡Que Viva México!", listOf("Pedro Guzman"), 191.0, listOf("Joaquin Lopez Doriga"), "23-3-2023", 5.8, Language.Español, Category.Comedia))
+        println("Catetelera cargada exitosamente....")
     }
+
     fun showMenu(){
         try {
             println("Menu")
@@ -30,6 +35,7 @@ class App () {
             println("2) Ver mi Lista")
             println("3) Agregar a mi Lista")
             println("4) Eliminar de mi Lista")
+            println("5) Salir")
             val menuOption = getConsoleLine("\"Ingresa la opcion deseada: \"").toInt()
 
             when (menuOption) {
@@ -37,6 +43,10 @@ class App () {
                 2 -> showMovieList()
                 3 -> addMovie()
                 4 -> deleteMovie()
+                5 -> {
+                    println("Gracias por usar MovieApp")
+                    exitProcess(0)
+                }
                 else-> {
                     println("No se encuentra dentro del catalogo")
                     showMenu()
@@ -51,10 +61,13 @@ class App () {
     }
 
     fun initCinema () {
+        println("Entro")
         showCinemaListings()
         do {
-            var menuOption = getConsoleLine("Ver mas detalles de las peliculas? (si / no)")
 
+            var menuOption = getConsoleLine("Ver mas detalles de las peliculas? (si / no)")
+            println("Entro 5")
+            println(menuOption)
             if (menuOption == "si") {
                 showCinemaListings(true)
                 menuOption = "no"
@@ -67,7 +80,6 @@ class App () {
     }
 
     fun showCinemaListings (showAllInfo: Boolean = false) {
-
         println("********* Cartelera ********")
         cinemaListings.forEach{Movie ->
             if (showAllInfo) Movie.printInfo(true)
