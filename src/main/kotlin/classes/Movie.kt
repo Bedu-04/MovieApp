@@ -4,7 +4,7 @@ import java.util.Date
 
 
 enum class Category {
-    Comedia, Drama, Suspenso, Terror
+    Comedia, Drama, Suspenso, Terror, Acción, CienciaFicción, Fantasía, Animación
 }
 
 enum class Language {
@@ -13,16 +13,23 @@ enum class Language {
 
 class Movie(
     val id: Int,
-   val name: String,
+    val name: String,
     val actors: List<String>,
     val duration: Double,
     val directors: List<String>,
     val date: String,
     val rating: Double,
     val language: Language,
-    val category: Category,
+    val category: Category
 ) {
-    // Agregar a tu lista
+    fun printInfo(showAllInfo: Boolean = false) {
+        if (showAllInfo) {
+            println("${id} - ${name} - ${language} - ${rating}☆ - ${duration}m")
+        } else {
+            println("${id} - ${name}")
+        }
+    }
 
-    // Eliminar de tu lista
+    fun addMovie(myMovieList: MutableList<Movie>) = myMovieList.add(this)
+
 }
