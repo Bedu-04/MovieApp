@@ -1,5 +1,6 @@
 package main.kotlin.Login
 
+import kotlinx.coroutines.runBlocking
 import main.kotlin.classes.App
 
 class WelcomeMenu {
@@ -26,6 +27,10 @@ class WelcomeMenu {
                 authService.login(username = inputUserName, password = inputpassword, onSuccess = {
                     println("********* Bienvenido $inputUserName *********")
                     val app = App()
+
+                    runBlocking {
+                        app.loadMovies()
+                    }
                     app.showMenu()
                 }, onError = {
                     println(it)
