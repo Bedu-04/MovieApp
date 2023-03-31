@@ -13,7 +13,7 @@ enum class Language {
 
 class Movie(
     val id: Int,
-   val name: String,
+    val name: String,
     val actors: List<String>,
     val duration: Double,
     val directors: List<String>,

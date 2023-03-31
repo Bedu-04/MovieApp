@@ -1,12 +1,13 @@
 package main.kotlin.Login
 
 // implementing interface
-class AuthenthicationServiceImpl: AuthService {
+class AuthenthicationServiceImpl : AuthService {
     private val users = mutableMapOf<String, String>()
 
     fun createAdminAccount() {
         users["admin"] = "admin"
     }
+
     override fun login(username: String, password: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
 
         val storedPassword = users[username]
@@ -24,8 +25,7 @@ class AuthenthicationServiceImpl: AuthService {
             onError("El usuario ya existe favor de ingresar otro")
         } else if (!validateUsername(username)) {
             onError("El usuario debe tener al menos 4 caracteres")
-        }
-        else {
+        } else {
             users[username] = password
             onSuccess()
         }

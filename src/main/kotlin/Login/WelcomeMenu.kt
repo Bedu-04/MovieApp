@@ -1,4 +1,5 @@
 package main.kotlin.Login
+
 import main.kotlin.classes.App
 
 class WelcomeMenu {
@@ -32,6 +33,7 @@ class WelcomeMenu {
                 }
                 )
             }
+
             2 -> {
                 println("cual seria su usuario")
                 val inputUserName = readLine()!!
@@ -45,15 +47,18 @@ class WelcomeMenu {
                     showMenu()
                 })
             }
+
             3 -> {
                 println("Gracias por usar MovieApp")
             }
+
             else -> {
                 println("Opción inválida")
                 showMenu()
             }
         }
     }
+
     fun menuText() {
         println("********* Bienvenido a MovieApp *********")
         println("1. Iniciar sesión")
