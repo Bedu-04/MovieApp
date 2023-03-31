@@ -20,9 +20,20 @@ class Movie(
     val date: String,
     val rating: Double,
     val language: Language,
-    val category: Category,
+    val category: Category
 ) {
     // Agregar a tu lista
 
     // Eliminar de tu lista
+
+    fun printInfo(showAllInfo: Boolean = false) {
+        if (showAllInfo) {
+            println("${id} - ${name} - ${language} - ${rating}☆ - ${duration}m")
+        } else {
+            println("${id} - ${name}")
+        }
+    }
+
+    fun addMovie(myMovieList: MutableList<Movie>) = myMovieList.add(this)
+
 }
